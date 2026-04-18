@@ -11,7 +11,7 @@ Wasifa Hossain - 101594842
 | Member | Vulnerability Found | Branch Name |
 |--------|-------------------|-------------|
 | Sanzida Islam | No HTTPS on api.0x10.cloud| sanzida-feature |
-| _______ | _______ | _______ |
+| Rezarta Marku | Open Port Exposure on api.0x10.cloud| rezarta-feature|
 | _______ | _______ | _______ |
 
 ## Videos
@@ -34,6 +34,32 @@ The website allows communication over HTTP instead of HTTPS. This means data tra
 Final URL: http://api.0x10.cloud
 [!] VULNERABILITY: Site does NOT use HTTPS
 → Data can be intercepted (MITM attack)
+
+## Vulnerability Report (Rezarta Marku)
+Title:
+
+Open Port Exposure on api.0x10.cloud
+
+Description:
+
+Ports such as Telnet (23), FTP (21), or Redis (6379) may be open on the target server. These services are often insecure or misconfigured. For example, Telnet sends data in plaintext, and Redis may allow unauthorized access if not secured. Open ports increase the attack surface and can be exploited by attackers.
+
+1. A Python script was used to scan common ports on the target server api.0x10.cloud using the socket library.
+
+2. The script attempted connections to ports: 21, 22, 23, 80, 443, and 6379.
+
+3. The scan result showed that only port 80 (HTTP) is open, while all other tested ports are closed.
+
+4. Since port 80 uses HTTP, communication is not encrypted and can be intercepted by attackers.
+
+Output:
+[+] Port 21 is closed
+[+] Port 22 is closed
+[+] Port 23 is closed
+[!] Port 80 is OPEN
+    → HTTP is insecure (no encryption)
+[+] Port 443 is closed
+[+] Port 6379 is closed
 
 ## Target
 
